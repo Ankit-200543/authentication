@@ -1,12 +1,11 @@
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
 
-// 1. Create the transporter once outside the function (best practice)
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ak8946562@gmail.com',     // Your Gmail address
-    pass: config.EMAIL_PASS,        // Your 16-character App Password
+    user: config.EMAIL,     
+    pass: config.EMAIL_PASS,     
   },
 });
 
@@ -14,7 +13,7 @@ const transporter = nodemailer.createTransport({
 async function sendMail(to, subject, text, html) {
   try {
     let mailOptions = {
-      from: '"Authentication" <your-email@gmail.com>', 
+      from: `"Authentication" <${config.EMAIL}>`, 
       to: to,
       subject: subject,
       text: text,
